@@ -4,7 +4,7 @@ import { Table } from 'reactstrap';
 import { Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
 function App() {
   const dataRandom = [
-    { Apunte: "React es un framework de código abierto para construir interfaces de usuario", Fecha: "21/02/2000", Etiqueta: "react" },
+    { Apunte: "React es un framwork de código abierto para realizar interfaces gráficas", Fecha: "21/02/2000", Etiqueta: "react" }
   ];
   const [data, setData] = useState(dataRandom);
   const [modalInsertar, setModalInsertar] = useState(false);
@@ -12,7 +12,7 @@ function App() {
   const [elementoSeleccionado, setElementoSeleccionado] = useState({
     Apunte: '',
     Fecha: '',
-    Etiqueta: ''
+    Etiqueta: '',
   });
   const seleccionarElemento = (elemento, caso) => {
     setElementoSeleccionado(elemento);
@@ -64,7 +64,7 @@ function App() {
               <th scope="row"></th>
               <td>{elemento.Apunte}</td>
               <td>{elemento.Fecha}</td>
-              <td>{elemento.Fecha}</td>
+              <td>{elemento.Etiqueta}</td>
               <td><button className="btn btn-danger" onClick={() => seleccionarElemento(elemento, 'Eliminar')}>Eliminar</button></td>
             </tr>
           ))
