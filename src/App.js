@@ -48,8 +48,9 @@ function App() {
   return (
     <div className="App-header">
       <h1>Guarda tus Apuntes!</h1>
-      <button className="btn btn-success" onClick={() => abrirModalInsertar()}>Insertar
-      </button>
+      <button1 className ="btn btn-success" size="lg" onClick={() => abrirModalInsertar()}>Insertar
+      </button1>
+
       <Table className="table table-bordered">
         <thead>
           <tr>
