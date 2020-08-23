@@ -11,7 +11,7 @@ function App() {
     { Apunte: "X3", Fecha: "21/02/2002", Etiqueta: "react" },
   ];
   const [data, setData] = useState(dataRandom);
-  const [modalEditar, setModalEditar] = useState(false);
+  const [modalInsertar, setModalInsertar] = useState(false);
   const [modalEliminar, setModalEliminar] = useState(false);
   const [elementoSeleccionado, setElementoSeleccionado] = useState({
     Apunte: '',
@@ -20,7 +20,7 @@ function App() {
   });
   const seleccionarElemento = (elemento, caso) => {
     setElementoSeleccionado(elemento);
-    (caso === 'Editar')&&setModalEditar(true)
+    (caso === 'Eliminar')&&setModalEliminar(true)
   }
   const manejarCambio=e=>{
     const {name, value}=e.target;
@@ -30,24 +30,26 @@ function App() {
     }))
 
   }
-  const editar=()=>{
-    var dataNueva=data;
-    dataNueva.map(elemento=>{
-      elemento.Apunte = elementoSeleccionado.Apunte
-      elemento.Fecha = elementoSeleccionado.Fecha
-      elemento.Fecha = elementoSeleccionado.Etiqueta
-    });
+  const eliminar = () => {
+    setData(data.filter(elemento=>elemento.Apunte!==elementoSeleccionado.Apunte));
+    setModalEliminar(false);
+  }
+  const abrirModalInsertar = ()=>{
+    setElementoSeleccionado(null);
+    setModalInsertar(true);
+  }
+  const insertar =() =>{
+    var valorInsertar = elementoSeleccionado;
+    var dataNueva = data;
+    dataNueva.push(valorInsertar);
     setData(dataNueva);
-    setModalEditar(false);
+    setModalInsertar(false);
   }
   return (
     <div className="App-header">
-      <InputGroup>
-        <InputGroupAddon addonType="prepend">
-          <InputGroupText></InputGroupText>
-        </InputGroupAddon>
-        <Input placeholder="Agregar Apunte" /> <Input Input placeholder="Agregar Fecha" /> <Input placeholder="Agregar Etiqueta" />
-      </InputGroup>
+      <h1>Guarda tus Apuntes!</h1>
+      <button className = "btn btn-success" onClick={()=>abrirModalInsertar()}>Insertar
+      </button>
       <Table className="table table-bordered">
         <thead>
           <tr>
@@ -55,6 +57,7 @@ function App() {
             <th>Apunte</th>
             <th>Fecha</th>
             <th>Etiqueta</th>
+            <th>¿Qué desea realizar?</th>
           </tr>
         </thead>
         <tbody>
@@ -64,61 +67,60 @@ function App() {
               <td>{elemento.Apunte}</td>
               <td>{elemento.Fecha}</td>
               <td>{elemento.Fecha}</td>
-              <td><button className="btn btn-primary" onClick = {() => seleccionarElemento(elemento, 'Editar')}>Editar</button>
-                <button className="btn btn-danger">Eliminar</button></td>
+              <td><button className="btn btn-danger" onClick = {() => seleccionarElemento(elemento, 'Eliminar')}>Eliminar</button></td>
             </tr>
           ))
           }
         </tbody>
       </Table>
-      <Modal isOpen = {modalEditar} >
-        <ModalHeader>
-          <div>
-            <h3>Editar Elementos</h3>
-          </div>
-        </ModalHeader>
+      <Modal isOpen = {modalEliminar}>
         <ModalBody>
-          <div className="form-group">
-            <label>Apunte</label>
-            <input
-              className = "form-control"
-              type = "text"
-              name = "Apunte"
-              value = {elementoSeleccionado && elementoSeleccionado.Apunte}
-              onChange = {manejarCambio}
-            />
-            <br />
-            <label>Fecha</label>
-            <input
-              className = "form-control"
-              type = 'text'
-              name = 'Fecha'
-              value = {elementoSeleccionado && elementoSeleccionado.Fecha}
-              onChange = {manejarCambio}
-            />
-            <br />
-            <label>Etiqueta</label>
-            <input 
-              className = "form-control"
-              type = 'text'
-              name = 'Etiqueta'
-              value = {elementoSeleccionado && elementoSeleccionado.Etiqueta}
-              onChange = {manejarCambio}
-            />
-            <br />
-          </div>
+          ¿Está seguro que desea eliminar el apunte {elementoSeleccionado && elementoSeleccionado.Apunte}?
         </ModalBody>
         <ModalFooter>
-          <button className = "btn btn-primary" onClick = {() => editar()}>
-            Actualizar
+          <button className = "btn btn-danger" onClick={()=>eliminar()}>
+            Aceptar
           </button>
           <button
-            className = "btn btn-danger"
-            onClick = {() => setModalEditar(false)}
-            >
-              Cancelar
-            </button>
+            className = "btn btn-secondary"
+            onClick = {() => setModalEliminar(false)}
+          >
+            Rechazar
+          </button>
         </ModalFooter>
+      </Modal>
+      <Modal isOpen = {modalInsertar}>
+        <ModalHeader>
+          <ModalBody>
+            <div className = "form-group">
+              <label>Apunte</label>
+              <input
+                className = "from-control"
+                type = "text"
+                name = "Apunte"
+                value = {elementoSeleccionado ? elementoSeleccionado.Apunte: ''}
+              />
+              <br />
+              <label>Fecha</label>
+              <input
+                className = "form-control"
+                type = "text"
+                name = "Fecha"
+                value = {elementoSeleccionado ? elementoSeleccionado.Fecha: ''}
+              />
+              <br />
+              <label>Etiqueta</label>
+              <input
+                className = "form-control"
+                type = "text"
+                name = "Etiqueta"
+                value = {elementoSeleccionado ? elementoSeleccionado.Etiqueta: ''}
+              />
+              <br />
+            </div>
+          </ModalBody>
+        </ModalHeader>
+        
       </Modal>
     </div >
   );
