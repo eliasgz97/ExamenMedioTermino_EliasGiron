@@ -124,12 +124,12 @@ function App() {
             </div>
           </ModalBody>
           <ModalFooter>
-            <button className="btn btn-primary">
+            <button className="btn btn-primary" onClick={()=>insertar(0)}>
               Agregar Apunte
           </button>
             <button
               className="btn btn-danger"
-              onClick={modalInsertar(false)}
+              onClick={()=>setmodalInsertar(false)}
             >
               Cancelar
           </button>
