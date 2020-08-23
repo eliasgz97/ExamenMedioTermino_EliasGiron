@@ -99,10 +99,11 @@ function App() {
             <div className="form-group">
               <label>Apunte</label>
               <input
-                className="from-control"
+                className="fromm-control"
                 type="text"
                 name="Apunte"
                 value={elementoSeleccionado ? elementoSeleccionado.Apunte : ''}
+                onChange = {manejarCambio}
               />
               <br />
               <label>Fecha</label>
@@ -111,6 +112,7 @@ function App() {
                 type="text"
                 name="Fecha"
                 value={elementoSeleccionado ? elementoSeleccionado.Fecha : ''}
+                onChange = {manejarCambio}
               />
               <br />
               <label>Etiqueta</label>
@@ -119,6 +121,7 @@ function App() {
                 type="text"
                 name="Etiqueta"
                 value={elementoSeleccionado ? elementoSeleccionado.Etiqueta : ''}
+                onChange = {manejarCambio}
               />
               <br />
             </div>
@@ -129,7 +132,7 @@ function App() {
           </button>
             <button
               className="btn btn-danger"
-              onClick={()=>setmodalInsertar(false)}
+              onClick={()=>setModalInsertar(false)}
             >
               Cancelar
           </button>
