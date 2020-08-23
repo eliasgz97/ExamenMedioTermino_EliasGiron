@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Button, ButtonGroup } from 'reactstrap';
 import { Table } from 'reactstrap';
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
 function App() {
   const dataRandom = [
-    { Apunte: "X1", Fecha: "21/02/2000", Etiqueta: "react" },
-    { Apunte: "X2", Fecha: "21/02/2001", Etiqueta: "react" },
-    { Apunte: "X3", Fecha: "21/02/2002", Etiqueta: "react" },
+    { Apunte: "React es un framework de código abierto para construir interfaces de usuario", Fecha: "21/02/2000", Etiqueta: "react" },
   ];
   const [data, setData] = useState(dataRandom);
   const [modalInsertar, setModalInsertar] = useState(false);
@@ -30,6 +26,7 @@ function App() {
     }))
 
   }
+  var contador = 0;
   const eliminar = () => {
     setData(data.filter(elemento => elemento.Apunte !== elementoSeleccionado.Apunte));
     setModalEliminar(false);
@@ -51,10 +48,10 @@ function App() {
       <button1 className ="btn btn-success" size="lg" onClick={() => abrirModalInsertar()}>Insertar
       </button1>
 
-      <Table className="table table-bordered">
+      <Table dark className="table table-bordered">
         <thead>
           <tr>
-            <th>#</th>
+            <th>Fila</th>
             <th>Apunte</th>
             <th>Fecha</th>
             <th>Etiqueta</th>
@@ -64,7 +61,7 @@ function App() {
         <tbody>
           {data.map(elemento => (
             <tr>
-              <th scope="row">1</th>
+              <th scope="row"></th>
               <td>{elemento.Apunte}</td>
               <td>{elemento.Fecha}</td>
               <td>{elemento.Fecha}</td>
