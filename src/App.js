@@ -99,7 +99,7 @@ function App() {
             <div className="form-group">
               <label>Apunte</label>
               <input
-                className="fromm-control"
+                className="form-control"
                 type="text"
                 name="Apunte"
                 value={elementoSeleccionado ? elementoSeleccionado.Apunte : ''}
