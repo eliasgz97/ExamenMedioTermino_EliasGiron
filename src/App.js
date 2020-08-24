@@ -26,7 +26,6 @@ function App() {
     }))
 
   }
-  var contador = 0;
   const eliminar = () => {
     setData(data.filter(elemento => elemento.Apunte !== elementoSeleccionado.Apunte));
     setModalEliminar(false);
@@ -45,32 +44,32 @@ function App() {
   return (
     <div className="App-header">
       <h1>Guarda tus Apuntes!</h1>
-      <button1 className ="btn btn-success" size="lg" onClick={() => abrirModalInsertar()}>Insertar
+      <button1 className="btn btn-success" size="lg" onClick={() => abrirModalInsertar()}>Insertar
       </button1>
-
-      <Table dark className="table table-bordered">
-        <thead>
-          <tr>
-            <th>Fila</th>
-            <th>Apunte</th>
-            <th>Fecha</th>
-            <th>Etiqueta</th>
-            <th>¿Qué desea realizar?</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map(elemento => (
+      <div className="table-responsive">
+        <Table dark className="table table-bordered">
+          <thead>
             <tr>
-              <th scope="row"></th>
-              <td>{elemento.Apunte}</td>
-              <td>{elemento.Fecha}</td>
-              <td>{elemento.Etiqueta}</td>
-              <td><button className="btn btn-danger" onClick={() => seleccionarElemento(elemento, 'Eliminar')}>Eliminar</button></td>
+              <th>Apunte</th>
+              <th>Fecha</th>
+              <th>Etiqueta</th>
+              <th>¿Qué desea realizar?</th>
             </tr>
-          ))
-          }
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {data.map(elemento => (
+              <tr>
+                <th scope="row"></th>
+                <td>{elemento.Apunte}</td>
+                <td>{elemento.Fecha}</td>
+                <td>{elemento.Etiqueta}</td>
+                <td><button className="btn btn-danger" onClick={() => seleccionarElemento(elemento, 'Eliminar')}>Eliminar</button></td>
+              </tr>
+            ))
+            }
+          </tbody>
+        </Table>
+      </div>
       <Modal isOpen={modalEliminar}>
         <ModalBody>
           ¿Está seguro que desea eliminar el apunte {elementoSeleccionado && elementoSeleccionado.Apunte}?
@@ -93,48 +92,48 @@ function App() {
             <h3>Agregar Apuntes</h3>
           </div>
         </ModalHeader>
-          <ModalBody>
-            <div className="form-group">
-              <label>Apunte</label>
-              <input
-                className="form-control"
-                type="text"
-                name="Apunte"
-                value={elementoSeleccionado ? elementoSeleccionado.Apunte : ''}
-                onChange = {manejarCambio}
-              />
-              <br />
-              <label>Fecha</label>
-              <input
-                className="form-control"
-                type="text"
-                name="Fecha"
-                value={elementoSeleccionado ? elementoSeleccionado.Fecha : ''}
-                onChange = {manejarCambio}
-              />
-              <br />
-              <label>Etiqueta</label>
-              <input
-                className="form-control"
-                type="text"
-                name="Etiqueta"
-                value={elementoSeleccionado ? elementoSeleccionado.Etiqueta : ''}
-                onChange = {manejarCambio}
-              />
-              <br />
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <button className="btn btn-primary" onClick={()=>insertar(0)}>
-              Agregar Apunte
+        <ModalBody>
+          <div className="form-group">
+            <label>Apunte</label>
+            <input
+              className="form-control"
+              type="text"
+              name="Apunte"
+              value={elementoSeleccionado ? elementoSeleccionado.Apunte : ''}
+              onChange={manejarCambio}
+            />
+            <br />
+            <label>Fecha</label>
+            <input
+              className="form-control"
+              type="text"
+              name="Fecha"
+              value={elementoSeleccionado ? elementoSeleccionado.Fecha : ''}
+              onChange={manejarCambio}
+            />
+            <br />
+            <label>Etiqueta</label>
+            <input
+              className="form-control"
+              type="text"
+              name="Etiqueta"
+              value={elementoSeleccionado ? elementoSeleccionado.Etiqueta : ''}
+              onChange={manejarCambio}
+            />
+            <br />
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <button className="btn btn-primary" onClick={() => insertar(0)}>
+            Agregar Apunte
           </button>
-            <button
-              className="btn btn-danger"
-              onClick={()=>setModalInsertar(false)}
-            >
-              Cancelar
+          <button
+            className="btn btn-danger"
+            onClick={() => setModalInsertar(false)}
+          >
+            Cancelar
           </button>
-          </ModalFooter>
+        </ModalFooter>
       </Modal>
     </div >
   );
