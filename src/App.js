@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import './App.css';
 import { Table } from 'reactstrap';
 import { Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
+function useLocalStorage(localItem){
+  const [loc, setState] = useState(localStorage.getItem(localItem));
+  function setLocal(newItem){
+    localStorage.setItem(localItem, newItem);
+    setState(newItem);
+  }
+  return [loc, setLocal];
+}
 function App() {
   const dataRandom = [
     { Apunte: "React es un framwork de código abierto para realizar interfaces gráficas", Fecha: "21/02/2000", Etiqueta: "react" }
@@ -38,6 +46,7 @@ function App() {
     var valorInsertar = elementoSeleccionado;
     var dataNueva = data;
     dataNueva.push(valorInsertar);
+    localStorage.setItem('Apunte', JSON.stringify(valorInsertar))
     setData(dataNueva);
     setModalInsertar(false);
   }
@@ -59,7 +68,6 @@ function App() {
           <tbody>
             {data.map(elemento => (
               <tr>
-                <th scope="row"></th>
                 <td>{elemento.Apunte}</td>
                 <td>{elemento.Fecha}</td>
                 <td>{elemento.Etiqueta}</td>
@@ -119,6 +127,7 @@ function App() {
               name="Etiqueta"
               value={elementoSeleccionado ? elementoSeleccionado.Etiqueta : ''}
               onChange={manejarCambio}
+
             />
             <br />
           </div>
